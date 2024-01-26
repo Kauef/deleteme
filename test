@@ -1,0 +1,12 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+def jenkins_home = Jenkins.get().getRootDir().absolutePath
+def initDirPath = Paths.get(jenkins_home, "init.groovy.d")
+def groovyFile = initDirPath.toRealPath().toString() + "/cli-shutdown.groovy"
+File file = new File(groovyFile)
+if (!file.exists()) {
+    println "Warning: This instance does not have the mitigation file in the correct path '${groovyFile}'..."
+}else{
+    println "This instance is protected by the mitigation script"
+}
